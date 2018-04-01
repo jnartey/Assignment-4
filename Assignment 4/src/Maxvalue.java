@@ -17,6 +17,19 @@ public class Maxvalue {
 			{17, 7, 0}
 		};
 		
+		//Print array
+		System.out.println("Array of random numbers\n"
+				+ "=============");
+		for(int[] row : numbers) {//Row
+			for(int column : row) {//Columns
+				System.out.printf("%4s",column + " ");
+			}
+			
+			System.out.println("");
+		}
+		
+		System.out.println("");
+		
 		for(int i = 0; i < numbers.length; i++) {//Rows
 			for(int j = 0; j < numbers[i].length/*Get length of row*/; j++) {//Columns
 				if(numbers[i][j] > numbers[rowPos][maxPos]) {

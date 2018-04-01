@@ -19,6 +19,19 @@ public class SumColumn {
 		//Instantiating Scanner class to read input
 		Scanner reader = new Scanner(System.in);
 		
+		//Print array
+		System.out.println("Array of random numbers\n"
+				+ "=============");
+		for(int[] row : numbers) {//Row
+			for(int column : row) {//Columns
+				System.out.printf("%4s",column + " ");
+			}
+			
+			System.out.println("");
+		}
+		
+		System.out.println("");
+		
 		int sum = 0;
 		int keepCol = 0;
 		do {

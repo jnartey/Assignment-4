@@ -10,7 +10,7 @@ public class TicTacToe {
 		//Instantiating Scanner class to read input
 		Scanner reader = new Scanner(System.in);
 		
-		//Creating 2D array of size 4
+		//Creating 2D array of size 3
 		char[][] board = new char[3][3];
 		char[] blankLine = {' ',' ',' '};		
 		
@@ -23,14 +23,17 @@ public class TicTacToe {
 		int countEven = 1;
 		
 		//Initializing user inputs  
-		int user1_x = 0;
-		int user1_y = 0;
-		int user2_x = 0;
-		int user2_y = 0;
-		int current_x = 0;
-		int current_y = 0;
+		int current_x = 0, current_y = 0;
+		
+		//User symbol variable
 		char symbol = ' ';
-		System.out.println("What row(x) and column(y) would you like to place your mark?");
+		
+		System.out.println(
+				"++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+				+ "+ What row(x) and column(y) would you like to place your mark?\n"
+				+ "+ or Enter 8 quit\n"
+				+ "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+				);
 		
 		//Increment counter to serve as a terminating condition if end of array;
 		int count = 0;
@@ -41,69 +44,85 @@ public class TicTacToe {
 				System.out.println("Your turn user 2:");
 				System.out.println("Enter row(x)");
 				System.out.print("> ");
-				user2_x = reader.nextInt();
+				current_x = reader.nextInt();
+				
+				//End program condition
+				if(current_x == 8) {
+					break;
+				}
+								
 				System.out.println("Enter column(y)");
 				System.out.print("> ");
-				user2_y = reader.nextInt();
+				current_y = reader.nextInt();
 				
-				current_x = user2_x;
-				current_y = user2_y;
+				//End program condition
+				if(current_y == 8) {
+					break;
+				}
+				
+				System.out.println("");
+				
 				symbol = 'Y';
 				
 			}else {
-				//Prompting User 2 to enter coordinates
+				//Prompting User 1 to enter coordinates
 				System.out.println("Your turn user 1:");
 				System.out.println("Enter row(x)");
 				System.out.print("> ");
-				user1_x = reader.nextInt();
+				current_x = reader.nextInt();
+				
+				//End program condition
+				if(current_x == 8) {
+					break;
+				}
+				
 				System.out.println("Enter column(y)");
 				System.out.print("> ");
-				user1_y = reader.nextInt();
+				current_y = reader.nextInt();
 				
-				current_x = user1_x;
-				current_y = user1_y;
+				//End program condition
+				if(current_y == 8) {
+					break;
+				}
+				
+				System.out.println("");
+				
 				symbol = 'X';
 			}
 			
-			//System.out.println("count: " + count);
-			
-			outer:for(int i = 0; i < board.length; i++) {//Rows
-				inner:for(int j = 0; j < board[i].length; j++) {//Columns
-					
-					//Check if that coordinate has been taken
-					if(board[i][j] == ' ') {
+			//Check if coordinates are within range
+			if(current_x >= 0 && current_x < 3 && current_y >= 0 && current_y < 3) {
+				if(board[current_x][current_y] == 'Y' || board[current_x][current_y] == 'X'){
+			        System.out.println("This spot is occupied. Please try again");
+			        continue;
+			    }
+				
+				for(int i = 0; i < board.length; i++) {//Rows
+					for(int j = 0; j < board[i].length; j++) {//Columns
 						board[current_x][current_y] = symbol;
-					}else {
-						if(board[i][j] == board[current_x][current_y] && board[i][j] == symbol) {
-							System.out.println("This coordinate is taken by you, try again!");
-						}else {
-							if(symbol == 'Y') {
-								System.out.println("This coordinate is taken by User 2, try again!");
-							}else if(symbol == 'X') {
-								System.out.println("This coordinate is taken by User 1, try again!");
-							}
-						}
-						
-						countEven--;
-						break outer;
 					}
 				}
-			}
 			
-			for(char[] row : board) {//Row
-				for(char column : row) {//Columns
-					System.out.print(column + " ");
+				//Print tic tac toe board after each user input
+				for(char[] row : board) {//Row
+					for(char column : row) {//Columns
+						System.out.print(column + " ");
+					}
+					
+					System.out.println("");
 				}
-				System.out.println("\n");
+			}else {
+				System.out.println("Invalid coordinates. Enter coordinates from 0 - 2. Please try again");
+				continue;
 			}
 			
+			//Increment counters
 			count++;
 			countEven++;
-			//continue;
 		}while(count < (board.length) * board[0].length);
 		
-		
-
+		System.out.println("Exiting program...");
+		reader.close();
 	}
 
 }
